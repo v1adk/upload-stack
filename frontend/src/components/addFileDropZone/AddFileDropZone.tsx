@@ -46,6 +46,7 @@ function AddPictureDropZone({}: AddPictureDropZoneProps): ReactElement {
                 alignItems: "center",
                 justifyContent: "center",
                 caretColor: "transparent",
+                display: "flex",
             }}
         >
             <input {...getInputProps()} />
