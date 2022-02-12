@@ -16,3 +16,25 @@
 .App-link {
   color: #61dafb;
 }
+
+.Upload-area {
+    min-height: 50vh;
+    min-width: 50%;
+    border-width: 2px;
+    border: dashed;
+    border-color: white;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    caret-color: transparent;
+    display: flex;
+}
+
+.Upload-area:hover {
+  background-color: rgb(62, 73, 95); 
+  cursor: pointer;
+  -webkit-transition: background-color 1s ease-out;
+  -moz-transition: background-color 1s ease-out;
+  -o-transition: background-color 1s ease-out;
+  transition: background-color 1s ease-out;
+}
