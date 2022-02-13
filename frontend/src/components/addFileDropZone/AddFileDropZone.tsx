@@ -7,23 +7,25 @@ interface AddPictureDropZoneProps {}
 function AddPictureDropZone({}: AddPictureDropZoneProps): ReactElement {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-    const handleOnDrop = useCallback((acceptedFiles: File[]) => {
+    const handleOnDrop = useCallback(async (acceptedFiles: File[]) => {
         if (acceptedFiles == null || acceptedFiles.length === 0) {
             console.log("No file selected");
+            setErrorMessage("No files selected");
         } else {
-            const file = acceptedFiles[0]; // always select the first file
-
-            if (file == null) {
-                console.error("Selected file is null.");
-                setErrorMessage("Selected file is missing. Please try again.");
-                return;
+            try {
+                const formData = new FormData();
+                acceptedFiles.forEach((acceptedFile) =>
+                    formData.append("files", acceptedFile)
+                );
+                await axios.post("http://localhost:8000/upload", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                });
+            } catch (error) {
+                console.error(error);
+                setErrorMessage("File upload failed.");
             }
-
-            axios.post("upload_file", file, {
-                headers: {
-                    "Content-Type": file.type,
-                },
-            });
         }
     }, []);
 
